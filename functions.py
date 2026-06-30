@@ -4,6 +4,12 @@ from pathlib import Path
 
 import base64
 import qrcode
+import os
+
+BASE_URL = os.environ.get(
+    'BASE_URL',
+    'http://127.0.0.1:8080'
+)
 
 UPLOAD_DIR = Path('uploads')
 UPLOAD_DIR.mkdir(exist_ok=True)
@@ -45,7 +51,7 @@ def create_QR(url, content):
         content.set_source(f'data:image/png;base64,{b64}')
 
     else:
-        url = f'http://127.0.0.1:8080/{file}'
+        url = f'{BASE_URL}/{file}'
 
         img = qrcode.make(url)
         QR_buffer = BytesIO()
