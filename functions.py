@@ -51,7 +51,7 @@ def create_QR(url, content):
         content.set_source(f'data:image/png;base64,{b64}')
 
     else:
-        url = f'{BASE_URL}/{file}'
+        url = f'{BASE_URL.rstrip("/")}/{file.as_posix()}'
 
         img = qrcode.make(url)
         QR_buffer = BytesIO()
